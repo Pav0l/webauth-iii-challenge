@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 // Import middlewares
 const serverError = require('./middleware/error');
+const reqLogger = require('./middleware/logger');
 // Import routes
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
@@ -19,6 +20,7 @@ const usersUrl = '/api/users';
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+app.use(reqLogger);
 
 app.use(registerUrl, registerRoutes);
 app.use(loginUrl, loginRoutes);

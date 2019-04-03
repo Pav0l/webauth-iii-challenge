@@ -11,10 +11,6 @@ SIGNUP USER
 */
 routes.post('/', async (req, res, next) => {
   let { username, department, password } = req.body;
-  console.log(`POST req.body:`);
-  console.log(`username: ${username}`);
-  console.log(`department: ${department}`);
-  console.log(`password: ${password}`);
 
   if (username || department || password) {
     try {
