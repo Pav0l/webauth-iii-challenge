@@ -6,7 +6,7 @@ const emptyForm = {
   password: '',
 };
 
-export default class Signup extends React.Component {
+export default class Login extends React.Component {
   state = {
     username: '',
     password: '',
