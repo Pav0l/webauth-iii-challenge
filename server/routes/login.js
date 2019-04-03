@@ -14,8 +14,12 @@ Returns the JsonWebToken as string
 */
 const createToken = user => {
 tokenPayload = {
+  // add the user ID to the token so we can identify him
   subject: user.user_id,
+  // add the user department to get his department colleagues
+  department: user.department,
 };
+// this returns the JWT string
 return jwt.sign(tokenPayload, process.env.JWT_SECRET);
 };
 
@@ -33,10 +37,13 @@ routes.post('/', async(req, res, next) => {
 
     if (savedUser) {
       const hashedPw = savedUser.password;
+      // check if the user has proper name/password
       const areTheseProperCredentials = bcrypt.compareSync(password, hashedPw);
       
       if (areTheseProperCredentials) {
+        // save JWT string inside a variable
         const token = createToken(savedUser);
+        // attach the token to the response body, so frontend can work with it
         res.status(200).json({ message: 'User logged in succesfully.', token });    
       } else {
         res.status(401).json({ error: 'Incorrect password'});
