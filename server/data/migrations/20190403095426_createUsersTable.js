@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments('user_id');
 
     table
-      .string('username', 128)
+      .string('username')
       .notNullable()
       .unique();
     
@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
 
 
     table
-      .string('department', 128)
+      .string('department')
       .notNullable();
     
     table.timestamps(true, true);

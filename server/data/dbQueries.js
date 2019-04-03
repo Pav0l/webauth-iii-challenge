@@ -10,8 +10,8 @@ module.exports = {
   getUsersInDepartment,
 };
 
-function insertUser(username, email, password) {
-  return db('users').insert({ username, email, password });
+function insertUser(username, department, password) {
+  return db('users').insert({ username, department, password });
 }
 
 function getUserByName(username) {

@@ -5,24 +5,27 @@ const helmet = require('helmet');
 // Import middlewares
 const serverError = require('./middleware/error');
 // Import routes
-// const signupRoutes = require('./signup');
-// const loginRoutes = require('./login');
+const registerRoutes = require('./routes/register');
+const loginRoutes = require('./routes/login');
+const usersRoutes = require('./routes/users');
 
 // Define variables
 const app = express();
-const signupUrl = '/api/signup';
+const registerUrl = '/api/register';
 const loginUrl = '/api/login';
+const usersUrl = '/api/users';
 
 app.use(express.json());
 app.use(helmet());
 
 
-// app.use(signupUrl, signupRoutes);
-// app.use(loginUrl, loginRoutes);
+app.use(registerUrl, registerRoutes);
+app.use(loginUrl, loginRoutes);
+app.use(usersUrl, usersRoutes);
 
 
-app.get('/api/users', (req, res) => {
-  res.status(200).json('Main home');
+app.get('/', (req, res) => {
+  res.status(200).json('Welcome to the home page');
 });
 
 
