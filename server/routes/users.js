@@ -1,4 +1,5 @@
 const express = require('express');
+const isUserAuth = require('../middleware/auth');
 const DB = require('../data/dbQueries');
 
 const routes = express.Router();
@@ -7,10 +8,10 @@ const routes = express.Router();
 
 /*
 GET ALL USERS
-@dev - [GET] - req.header must contain cookie with proper session info
+@dev - [GET] - req.header must contain authorization header with proper JWT
 @dev - returns an array of all users
 */
-routes.get('/', async (req, res, next) => {
+routes.get('/', isUserAuth, async (req, res, next) => {
   try {
     const getEveryUser = await DB.getAllUsers();
     res.status(200).json(getEveryUser);

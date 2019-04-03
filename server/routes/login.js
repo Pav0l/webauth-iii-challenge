@@ -1,10 +1,23 @@
+require('dotenv').config();
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const DB = require('../data/dbQueries');
 
 const routes = express.Router();
 
-// @TODO - edit the endpoint with JWT token
+
+/*
+https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
+jwt.sign(payload, secretOrPrivateKey, [options, callback])
+Returns the JsonWebToken as string
+*/
+const createToken = user => {
+tokenPayload = {
+  subject: user.user_id,
+};
+return jwt.sign(tokenPayload, process.env.JWT_SECRET);
+};
 
 /*
 LOGIN USER
@@ -22,8 +35,9 @@ routes.post('/', async(req, res, next) => {
       const hashedPw = savedUser.password;
       const areTheseProperCredentials = bcrypt.compareSync(password, hashedPw);
       
-      if (areTheseProperCredentials) {  
-        res.status(200).json({ message: 'User logged in succesfully.' });    
+      if (areTheseProperCredentials) {
+        const token = createToken(savedUser);
+        res.status(200).json({ message: 'User logged in succesfully.', token });    
       } else {
         res.status(401).json({ error: 'Incorrect password'});
       }
