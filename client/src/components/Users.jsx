@@ -15,7 +15,6 @@ export default class Users extends React.Component {
     customAxios()
       .get('http://127.0.0.1:4000/api/users')
       .then(res => {
-        console.log('customAxios getUsers:', res.data);
         this.setState({ users: res.data });
       })
       .catch(err => console.log(err));
