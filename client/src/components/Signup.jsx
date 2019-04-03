@@ -32,39 +32,43 @@ export default class Signup extends React.Component {
 
   render() {
     return (
-      <form autoComplete='off' onSubmit={this.buttonClick}>
-        <input
-          name='username'
-          placeholder='username'
-          type='text'
-          onChange={this.onInputChange}
-          value={this.state.username}
-        />
+      <div>
+        <h3>Sign up form</h3>
 
-        <input
-          name='department'
-          placeholder='department'
-          type='text'
-          onChange={this.onInputChange}
-          value={this.state.department}
-        />
+        <form autoComplete='off' onSubmit={this.buttonClick}>
+          <input
+            name='username'
+            placeholder='username'
+            type='text'
+            onChange={this.onInputChange}
+            value={this.state.username}
+          />
 
-        <input
-          name='password'
-          placeholder='password'
-          type='password'
-          onChange={this.onInputChange}
-          value={this.state.password}
-        />
+          <input
+            name='department'
+            placeholder='department'
+            type='text'
+            onChange={this.onInputChange}
+            value={this.state.department}
+          />
 
-        <div>
-          Already have an account? <a href='/login'>Log in!</a>
-        </div>
+          <input
+            name='password'
+            placeholder='password'
+            type='password'
+            onChange={this.onInputChange}
+            value={this.state.password}
+          />
 
-        <button type='submit' onClick={this.buttonClick}>
-          Sign up
-        </button>
-      </form>
+          <div>
+            Already have an account? <a href='/login'>Log in!</a>
+          </div>
+
+          <button type='submit' onClick={this.buttonClick}>
+            Sign up
+          </button>
+        </form>
+      </div>
     );
   }
 }
